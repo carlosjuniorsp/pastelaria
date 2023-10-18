@@ -22,4 +22,5 @@ $router->group(['prefix' => '/api/clients'], function () use ($router) {
     $router->post("/", "ClientsController@store");
     $router->put("{id}", "ClientsController@update");
     $router->delete("{id}", "ClientsController@destroy");
+    $router->get("/deleted", "ClientsController@clientDeleted");
 });
