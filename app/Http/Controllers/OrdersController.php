@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clients;
 use Illuminate\Http\Request;
 use App\Models\Orders;
 use App\Models\Products;
@@ -22,7 +23,7 @@ class OrdersController extends Controller
     }
 
     /**
-     * Show all customers
+     * Show all orders
      * @param integer $id
      * @param Request $request
      * @return json
@@ -40,7 +41,7 @@ class OrdersController extends Controller
     }
 
     /**
-     * Shows a single customer
+     * Displays an order
      * @param integer $id
      * @return json
      */
@@ -65,7 +66,7 @@ class OrdersController extends Controller
             ];
         }
 
-        if ($client) {
+        if ($client && $result) {
             return response()->json(
                 [
                     'orders' => $order->id,
@@ -88,6 +89,24 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
+        $data_client = $this->validateClient($request['client_id']);
+        if (!$data_client) {
+            return [
+                'message' => 'O pedido não pode ser criado, o cliente não existe!',
+                'status' => 200
+            ];
+        }
+
+        $products = new Products();
+        foreach ($request['product_id'] as $product_id) {
+            $products = $products->find($product_id);
+            if (empty($products)) {
+                return [
+                    "message" => "O produto (" . $product_id . ") Não existe, portanto o pedido não pode ser feito!",
+                ];
+            }
+        }
+
         $this->validateForm($request);
         $order = $this->model->create($request->all());
         return response()->json($order);
@@ -107,6 +126,24 @@ class OrdersController extends Controller
                 'message' => 'Não foi possível atualizar os dados, o pedido não existe!',
                 'status' => 200
             ];
+        }
+
+        $data_client = $this->validateClient($request['client_id']);
+        if (!$data_client) {
+            return [
+                'message' => 'O pedido não ser atualizado, o cliente não existe!',
+                'status' => 200
+            ];
+        }
+
+        $products = new Products();
+        foreach ($request['product_id'] as $product_id) {
+            $products = $products->find($product_id);
+            if (empty($products)) {
+                return [
+                    "message" => "O produto (" . $product_id . ") Não existe, portanto o pedido não pode ser atualizado!",
+                ];
+            }
         }
 
         $this->validateForm($request);
@@ -130,7 +167,7 @@ class OrdersController extends Controller
         }
         $order->delete();
         return response()->json([
-            'message' => 'Os dados foram deletados com sucesso!',
+            'message' => 'O pedido foi deletado com sucesso!',
             'status' => 200
         ]);
     }
@@ -148,5 +185,15 @@ class OrdersController extends Controller
         ], [
             'required' => "O :attribute é obrigatório",
         ]);
+    }
+
+    /**
+     * Get client by id
+     * @return Client
+     */
+    private function validateClient($client_id)
+    {
+        $client = new Clients();
+        return $client->find($client_id);
     }
 }
