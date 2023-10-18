@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained('clients');
-            $table->foreignId('product_id')->constrained('clients');
+            $table->json('product_id');
             $table->softDeletes();
             $table->timestamps();
         });

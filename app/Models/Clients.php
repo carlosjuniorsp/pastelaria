@@ -24,4 +24,9 @@ class Clients extends Model
     protected $hidden = [
         'updated_at'
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Orders::class, 'client_id', 'id');
+    }
 }
