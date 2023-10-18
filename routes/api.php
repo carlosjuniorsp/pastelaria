@@ -14,7 +14,7 @@
 */
 
 /**
- * Customer Route Group
+ * Customer Route Group the clients
  */
 $router->group(['prefix' => '/api/clients'], function () use ($router) {
     $router->get("/", "ClientsController@index");
@@ -22,4 +22,16 @@ $router->group(['prefix' => '/api/clients'], function () use ($router) {
     $router->post("/", "ClientsController@store");
     $router->put("{id}", "ClientsController@update");
     $router->delete("{id}", "ClientsController@destroy");
+});
+
+
+/**
+ * Customer Route Group the products
+ */
+$router->group(['prefix' => '/api/products'], function () use ($router) {
+    $router->get("/", "ProductsController@index");
+    $router->get("/{id}", "ProductsController@show");
+    $router->post("/", "ProductsController@store");
+    $router->put("{id}", "ProductsController@update");
+    $router->delete("{id}", "ProductsController@destroy");
 });
