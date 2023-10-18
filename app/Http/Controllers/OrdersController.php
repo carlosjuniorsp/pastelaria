@@ -53,11 +53,11 @@ class OrdersController extends Controller
                 'status' => 200
             ];
         }
-        $client = $order->client()->first();    
-        
+        $client = $order->client()->first();
+
         $products = new Products();
         $result = [];
-        foreach($order->product_id as $product_id) {
+        foreach ($order->product_id as $product_id) {
             $products = $products->find($product_id);
             $result[] = [
                 'name' => $products->name,
@@ -65,7 +65,7 @@ class OrdersController extends Controller
             ];
         }
 
-        if($client) {
+        if ($client) {
             return response()->json(
                 [
                     'orders' => $order->id,
