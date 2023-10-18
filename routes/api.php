@@ -40,10 +40,10 @@ $router->group(['prefix' => '/api/products'], function () use ($router) {
 /**
  * Customer Route Group the order
  */
-$router->group(['prefix' => '/api/order'], function () use ($router) {
-    $router->get("/", "OrderController@index");
-    $router->get("/{id}", "OrderController@show");
-    $router->post("/", "OrderController@store");
-    $router->put("{id}", "OrderController@update");
-    $router->delete("{id}", "OrderController@destroy");
+$router->group(['prefix' => '/api/orders'], function () use ($router) {
+    $router->get("/", "OrdersController@index");
+    $router->get("/{id}", "OrdersController@show");
+    $router->post("/", "OrdersController@store");
+    $router->put("{id}", "OrdersController@update");
+    $router->delete("{id}", "OrdersController@destroy");
 });
