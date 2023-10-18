@@ -13,6 +13,13 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+/**
+ * Customer Route Group
+ */
+$router->group(['prefix' => '/api/clients'], function () use ($router) {
+    $router->get("/", "ClientsController@getAll");
+    $router->get("/{id}", "ClientsController@get");
+    $router->post("/", "ClientsController@store");
+    $router->put("{id}", "ClientsController@update");
+    $router->delete("{id}", "ClientsController@destroy");
 });
