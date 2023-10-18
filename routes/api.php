@@ -17,7 +17,7 @@
  * Customer Route Group
  */
 $router->group(['prefix' => '/api/clients'], function () use ($router) {
-    $router->get("/", "ClientsController@getAll");
+    $router->get("/", "ClientsController@index");
     $router->get("/{id}", "ClientsController@get");
     $router->post("/", "ClientsController@store");
     $router->put("{id}", "ClientsController@update");
