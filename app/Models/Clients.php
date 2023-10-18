@@ -20,4 +20,8 @@ class Clients extends Model
         'district',
         'zip_code',
     ];
+
+    protected $hidden = [
+        'updated_at'
+    ];
 }
