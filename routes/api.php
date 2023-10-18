@@ -35,3 +35,15 @@ $router->group(['prefix' => '/api/products'], function () use ($router) {
     $router->put("{id}", "ProductsController@update");
     $router->delete("{id}", "ProductsController@destroy");
 });
+
+
+/**
+ * Customer Route Group the order
+ */
+$router->group(['prefix' => '/api/order'], function () use ($router) {
+    $router->get("/", "OrderController@index");
+    $router->get("/{id}", "OrderController@show");
+    $router->post("/", "OrderController@store");
+    $router->put("{id}", "OrderController@update");
+    $router->delete("{id}", "OrderController@destroy");
+});
