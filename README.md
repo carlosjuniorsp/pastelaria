@@ -34,7 +34,7 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 ## STEP 3:
     run the command in the terminal: docker-compose up -d
 ## STEP 4:
-    run the command in the terminal: docker exec app bash
+    run the command in the terminal: docker-compose exec app bash
 ## STEP 5: 
     Inside the container, run the command: composer install
 ## STEP 6:
