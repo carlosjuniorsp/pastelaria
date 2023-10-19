@@ -6,6 +6,7 @@ use App\Models\Clients;
 use Illuminate\Http\Request;
 use App\Models\Orders;
 use App\Models\Products;
+use App\Mail\SendMailOrder;
 
 class OrdersController extends Controller
 {
@@ -55,31 +56,9 @@ class OrdersController extends Controller
             ];
         }
         $client = $order->client()->first();
-
-        $products = new Products();
-        $result = [];
-        foreach ($order->product_id as $product_id) {
-            $products = $products->find($product_id);
-            $result[] = [
-                'name' => $products->name,
-                'price' => $products->price
-            ];
-        }
-
-        if ($client && $result) {
-            return response()->json(
-                [
-                    'orders' => $order->id,
-                    'client' => [
-                        'id' => $client->id,
-                        'name' => $client->name,
-                        'phone' => $client->phone,
-                    ],
-                    'products' => $result
-                ]
-            );
-        }
+        return $this->orderStructure($client, $order);
     }
+
 
     /**
      * Create the order
@@ -109,12 +88,18 @@ class OrdersController extends Controller
 
         $this->validateForm($request);
         $order = $this->model->create($request->all());
+        if ($order) {
+            $client = $order->client()->first();
+            $teste = $this->orderStructure($client, $order);
+            $sendMailOrder = new SendMailOrder();
+            $sendMailOrder->mailSend($teste);
+        }
         return response()->json($order);
     }
 
     /**
      * Update the order
-     * @param integer $id
+     * @param integer $ids
      * @param Request $request
      * @return json
      */
@@ -195,5 +180,37 @@ class OrdersController extends Controller
     {
         $client = new Clients();
         return $client->find($client_id);
+    }
+
+    /**
+     * Assemble the order structure
+     * @param Client $client
+     * @param Order $order
+     * @return json
+     */
+    private function orderStructure($client, $order)
+    {
+        $products = new Products();
+        $result = [];
+        foreach ($order->product_id as $product_id) {
+            $products = $products->find($product_id);
+            $result[] = [
+                'name' => $products->name,
+                'price' => $products->price
+            ];
+        }
+
+        if ($client && $result) {
+            return
+                [
+                    'order' => $order->id,
+                    'client' => [
+                        'id' => $client->id,
+                        'name' => $client->name,
+                        'phone' => $client->phone,
+                    ],
+                    'product' => $result
+                ];
+        }
     }
 }
