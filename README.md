@@ -51,6 +51,7 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
     Open the .env file and paste your hask into API_KEY
 ## STEP 12: 
     Test your application: 
+    Postman or Thunder Client extension Vscode
         http://localhost:8989/
     ## Routers Client:
         GET: /api/clients
