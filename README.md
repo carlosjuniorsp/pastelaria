@@ -38,18 +38,20 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 ## STEP 5: 
     Inside the container, run the command: composer install
 ## STEP 6:
+    run the command: cp .env.example .env
+## STEP 7:
     Inside the container, run the command: php artisan migrate
-## STEP 7: 
+## STEP 8: 
      Inside the container, run the command: php -r "echo md5(uniqid()).\"\n\";"
-## STEP 8:
-   Run the exit command to "exit" the container terminal
 ## STEP 9:
-    run the command in the terminal: docker-compose up -d
-## STEP 10:
     copy the hash: example: 7142720170cef01171fd4af26ef17c93 (do not use this hash)
+## STEP 10:
+     Open the .env file and paste your hask into API_KEY=PAST HASH
 ## STEP 11:
-    Open the .env file and paste your hask into API_KEY
-## STEP 12: 
+   Run the exit command to "exit" the container terminal
+## STEP 12:
+    run the command in the terminal: docker-compose up -d
+## STEP 13: 
     Test your application: 
     Postman or Thunder Client extension Vscode
         http://localhost:8989/
