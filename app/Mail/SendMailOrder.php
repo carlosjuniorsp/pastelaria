@@ -11,18 +11,18 @@ class SendMailOrder
     /**
      * Structure and sending by email
      */
-    public function mailSend($data_order)
+    public function mailSend($data_email)
     {
         $product = [];
         $total_order = 0;
-        foreach ($data_order['product'] as $products) {
-            $total_order += $products['price'];
-            $product[] = $products;
+        foreach ($data_email['product'] as $product) {
+            $total_order += $product['price'];
+            $product[] = $product;
         }
 
         $data = [
-            'order' => $data_order['order'],
-            'client_name' => $data_order['client']['name'],
+            'order' => $data_email['order'],
+            'client_name' => $data_email['client']['name'],
             'product' =>  $product,
             'total_order' =>  'R$ ' . number_format($total_order, 2, ',', '.')
         ];

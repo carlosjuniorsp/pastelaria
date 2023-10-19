@@ -71,7 +71,7 @@ class OrdersController extends Controller
         $data_client = $this->validateClient($request['client_id']);
         if (!$data_client) {
             return [
-                'message' => 'O pedido não pode ser criado, o cliente não existe!',
+                "message" => "O client (" . $request['client_id'] . ") Não existe, portanto o pedido não pode ser feito!",
                 'status' => 200
             ];
         }
@@ -90,9 +90,9 @@ class OrdersController extends Controller
         $order = $this->model->create($request->all());
         if ($order) {
             $client = $order->client()->first();
-            $teste = $this->orderStructure($client, $order);
+            $data_email = $this->orderStructure($client, $order);
             $sendMailOrder = new SendMailOrder();
-            $sendMailOrder->mailSend($teste);
+            $sendMailOrder->mailSend($data_email);
         }
         return response()->json($order);
     }
@@ -108,7 +108,7 @@ class OrdersController extends Controller
         $order = $this->model->find($id);
         if (empty($order)) {
             return [
-                'message' => 'Não foi possível atualizar os dados, o pedido não existe!',
+                'message' => 'Não foi possível atualizar os dados, o pedido (' . $id . ') não existe!',
                 'status' => 200
             ];
         }
@@ -116,7 +116,7 @@ class OrdersController extends Controller
         $data_client = $this->validateClient($request['client_id']);
         if (!$data_client) {
             return [
-                'message' => 'O pedido não ser atualizado, o cliente não existe!',
+                'message' => 'O pedido não ser atualizado, o cliente (' . $request['client_id'] . ') não existe!',
                 'status' => 200
             ];
         }
@@ -146,13 +146,13 @@ class OrdersController extends Controller
         $order = $this->model->find($id);
         if (empty($order)) {
             return [
-                'message' => 'Não foi possível deletar os dados, o pedido não existe!',
+                'message' => 'Não foi possível deletar os dados, o pedido (' . $id . ') não existe!',
                 'status' => 200
             ];
         }
         $order->delete();
         return response()->json([
-            'message' => 'O pedido foi deletado com sucesso!',
+            'message' => 'O pedido (' . $id . ') foi deletado com sucesso!',
             'status' => 200
         ]);
     }
@@ -175,6 +175,7 @@ class OrdersController extends Controller
     /**
      * Get client by id
      * @return Client
+     * @param integer $client_id
      */
     private function validateClient($client_id)
     {
@@ -188,11 +189,11 @@ class OrdersController extends Controller
      * @param Order $order
      * @return json
      */
-    private function orderStructure($client, $order)
+    private function orderStructure($client, $orders)
     {
         $products = new Products();
         $result = [];
-        foreach ($order->product_id as $product_id) {
+        foreach ($orders->product_id as $product_id) {
             $products = $products->find($product_id);
             $result[] = [
                 'name' => $products->name,
@@ -203,7 +204,7 @@ class OrdersController extends Controller
         if ($client && $result) {
             return
                 [
-                    'order' => $order->id,
+                    'order' => $orders->id,
                     'client' => [
                         'id' => $client->id,
                         'name' => $client->name,
