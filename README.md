@@ -47,9 +47,9 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
     run the command in the terminal: docker-compose up -d
 ## STEP 9:
     copy the hash: example: 7142720170cef01171fd4af26ef17c93 (do not use this hash)
-## STEP 8:
+## STEP 10:
     Open the .env file and paste your hask into API_KEY
-## STEP 9: 
+## STEP 11: 
     Test your application: 
         http://localhost:8989/api/clients
     
