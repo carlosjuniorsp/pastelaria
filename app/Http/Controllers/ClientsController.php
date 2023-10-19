@@ -79,7 +79,7 @@ class ClientsController extends Controller
         $client = $this->model->find($id);
         if (empty($client)) {
             return [
-                'message' => 'Não foi possível atualizar os dados, o cliente não existe!',
+                'message' => 'Não foi possível atualizar os dados, o cliente (' . $id . ') não existe!',
                 'status' => 200
             ];
         }
@@ -99,7 +99,7 @@ class ClientsController extends Controller
         $client = $this->model->find($id);
         if (empty($client)) {
             return [
-                'message' => 'Não foi possível deletar os dados, o cliente não existe!',
+                'message' => 'Não foi possível deletar os dados, o cliente (' . $id . ') não existe!',
                 'status' => 200
             ];
         }

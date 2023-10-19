@@ -59,7 +59,6 @@ class OrdersController extends Controller
         return $this->orderStructure($client, $order);
     }
 
-
     /**
      * Create the order
      * @param integer $id
@@ -87,14 +86,14 @@ class OrdersController extends Controller
         }
 
         $this->validateForm($request);
-        $order = $this->model->create($request->all());
-        if ($order) {
-            $client = $order->client()->first();
-            $data_email = $this->orderStructure($client, $order);
+        $orders = $this->model->create($request->all());
+        if ($orders) {
+            $client = $orders->client()->first();
+            $data_email = $this->orderStructure($client, $orders);
             $sendMailOrder = new SendMailOrder();
             $sendMailOrder->mailSend($data_email);
         }
-        return response()->json($order);
+        return response()->json($orders);
     }
 
     /**

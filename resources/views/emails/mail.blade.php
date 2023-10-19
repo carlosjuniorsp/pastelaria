@@ -11,10 +11,9 @@
         <b>Número do pedido: {{ $order }}</b><br>
         <b>Nome do cliente: {{ $client_name }}</b><br>
         <b>Itens do pedido: <br>
-            @foreach ($product as $products)
+            @foreach ($product as $product)
                 <ul>
-                    <li>Nome: {{ $products['name'] }} -
-                        Preço: {{ 'R$ ' . number_format($products['price'], 2, ',', '.') }}
+                    <li>Nome: {{ $product['name'] }} - Preço: {{ 'R$ ' . number_format($product['price'], 2, ',', '.') }}
                     </li>
                 </ul>
             @endforeach

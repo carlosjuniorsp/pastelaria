@@ -82,7 +82,7 @@ class ProductsController extends Controller
         $product = $this->model->find($id);
         if (empty($product)) {
             return [
-                'message' => 'Não foi possível atualizar os dados, o produto não existe!',
+                'message' => 'Não foi possível atualizar os dados, o produto (' . $id . ') não existe!',
                 'status' => 200
             ];
         }
@@ -106,7 +106,7 @@ class ProductsController extends Controller
 
         if (empty($product)) {
             return [
-                'message' => 'Não foi possível deletar os dados, o produto não existe!',
+                'message' => 'Não foi possível deletar os dados, o produto (' . $id . ') não existe!',
                 'status' => 200
             ];
         }

@@ -13,17 +13,17 @@ class SendMailOrder
      */
     public function mailSend($data_email)
     {
-        $product = [];
+        $products = [];
         $total_order = 0;
         foreach ($data_email['product'] as $product) {
             $total_order += $product['price'];
-            $product[] = $product;
+            $products[] = $product;
         }
 
         $data = [
             'order' => $data_email['order'],
             'client_name' => $data_email['client']['name'],
-            'product' =>  $product,
+            'product' =>  $products,
             'total_order' =>  'R$ ' . number_format($total_order, 2, ',', '.')
         ];
 
