@@ -13,6 +13,10 @@
 |
 */
 
+$router->group(['prefix' => '/'], function () use ($router) {
+    $router->get("/", "HomeController@index");
+});
+
 /**
  * Customer Route Group the clients
  */
