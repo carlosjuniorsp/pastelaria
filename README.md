@@ -42,6 +42,10 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 ## STEP 6: 
      Inside the container, run the command: php -r "echo md5(uniqid()).\"\n\";"
 ## STEP 7:
+   Run the exit command to "exit" the container terminal
+## STEP 8:
+    run the command in the terminal: docker-compose up -d
+## STEP 9:
     copy the hash: example: 7142720170cef01171fd4af26ef17c93 (do not use this hash)
 ## STEP 8:
     Open the .env file and paste your hask into API_KEY
