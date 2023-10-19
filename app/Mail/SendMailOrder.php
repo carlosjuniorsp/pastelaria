@@ -24,7 +24,7 @@ class SendMailOrder
             'order' => $data_order['order'],
             'client_name' => $data_order['client']['name'],
             'product' =>  $product,
-            'total_order' =>  'R$ '.number_format($total_order, 2, ',', '.')
+            'total_order' =>  'R$ ' . number_format($total_order, 2, ',', '.')
         ];
 
         try {
