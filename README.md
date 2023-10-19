@@ -35,21 +35,21 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
     run the command in the terminal: docker-compose up -d
 ## STEP 4:
     run the command in the terminal: docker exec app bash
-## STEP 4: 
+## STEP 5: 
     Inside the container, run the command: composer install
-## STEP 5:
+## STEP 6:
     Inside the container, run the command: php artisan migrate
-## STEP 6: 
+## STEP 7: 
      Inside the container, run the command: php -r "echo md5(uniqid()).\"\n\";"
-## STEP 7:
-   Run the exit command to "exit" the container terminal
 ## STEP 8:
-    run the command in the terminal: docker-compose up -d
+   Run the exit command to "exit" the container terminal
 ## STEP 9:
-    copy the hash: example: 7142720170cef01171fd4af26ef17c93 (do not use this hash)
+    run the command in the terminal: docker-compose up -d
 ## STEP 10:
+    copy the hash: example: 7142720170cef01171fd4af26ef17c93 (do not use this hash)
+## STEP 11:
     Open the .env file and paste your hask into API_KEY
-## STEP 11: 
+## STEP 12: 
     Test your application: 
         http://localhost:8989/api/clients
     
