@@ -24,3 +24,53 @@ If you discover a security vulnerability within Lumen, please send an e-mail to 
 ## License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## RUN PROJECT
+## STEP 1: 
+    clone the project: git clone https://github.com/carlosjuniorsp/pastelaria.git
+## STEP 2:
+    Go to the project root folder
+## STEP 3:
+    run the command in the terminal: docker-compose up -d
+## STEP 4:
+    run the command in the terminal: docker exec app bash
+## STEP 5: 
+    Inside the container, run the command: composer install
+## STEP 6:
+    Inside the container, run the command: php artisan migrate
+## STEP 7: 
+     Inside the container, run the command: php -r "echo md5(uniqid()).\"\n\";"
+## STEP 8:
+   Run the exit command to "exit" the container terminal
+## STEP 9:
+    run the command in the terminal: docker-compose up -d
+## STEP 10:
+    copy the hash: example: 7142720170cef01171fd4af26ef17c93 (do not use this hash)
+## STEP 11:
+    Open the .env file and paste your hask into API_KEY
+## STEP 12: 
+    Test your application: 
+    Postman or Thunder Client extension Vscode
+        http://localhost:8989/
+    ## Routers Client:
+        GET: /api/clients
+        GET: /api/clients/{id}
+        POST: /api/clientes
+        PUT: /api/clientes/{id}
+        DELETE: /api/clientes/{id}
+     ## Routers Products:
+        GET: /api/products
+        GET: /api/products/{id}
+        POST: /api/products
+        PUT: /api/products/{id}
+        DELETE: /api/products/{id}
+    ## Routers Orders:
+        GET: /api/orders
+        GET: /api/orders/{id}
+        POST: /api/orders
+        PUT: /api/orders/{id}
+        DELETE: /api/orders/{id}
+    
+        
+    
