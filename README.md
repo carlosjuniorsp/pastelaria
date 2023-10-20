@@ -50,8 +50,12 @@ The Lumen framework is open-sourced software licensed under the [MIT license](ht
 ## STEP 11:
    Run the exit command to "exit" the container terminal
 ## STEP 12:
+   Create an account on the sendgrid website and generate your API key to send emails
+## STEP 13:
+   Update API_KEY from.env
+## STEP 14:
     run the command in the terminal: docker-compose up -d
-## STEP 13: 
+## STEP 15: 
     Test your application: 
     Postman or Thunder Client extension Vscode
         http://localhost:8989/
